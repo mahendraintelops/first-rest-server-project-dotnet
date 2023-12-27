@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: StudentService
+  name: StudentService
+  labels:
+    app: StudentService
+spec:
+  selector:
+    matchLabels:
+      app: StudentService
+  template:
+    metadata:
+      labels:
+        app: StudentService
+        name: StudentService
+    spec:
+      containers:
+        - name: StudentService
+          image: mahendraintelops/first-rest-server-project-dotnet/StudentService
+          imagePullPolicy: Always
+          ports:
+        
+          - containerPort: 5005
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        

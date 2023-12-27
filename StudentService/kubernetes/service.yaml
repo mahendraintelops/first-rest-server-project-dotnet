@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: StudentService
+  labels:
+    app: StudentService
+  name: StudentService
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 5005
+      targetPort: 5005
+   
+  selector:
+    app: StudentService
+  type: ClusterIP
